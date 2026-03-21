@@ -1,0 +1,62 @@
+[
+  {
+    "id": "shop_001",
+    "name": "Amber Roast House",
+    "image": "assets/images/amber_roast_house.jpg",
+    "shortTags": ["manual brew", "quiet", "wifi"],
+    "shortDescription": "Warm neighborhood cafe focused on pour-over and seasonal beans.",
+    "location": "Jl. Melati 12, Bandung",
+    "hours": "07:00 - 22:00",
+    "priceRange": "Rp25.000 - Rp65.000",
+    "directions": "Across from Melati Park, next to the bookstore.",
+    "otherInfo": "Power outlets at every table."
+  },
+  {
+    "id": "shop_002",
+    "name": "Kopi Halaman",
+    "image": "assets/images/kopi_halaman.jpg",
+    "shortTags": ["outdoor", "pet friendly", "brunch"],
+    "shortDescription": "Garden-style coffee spot with all-day brunch and espresso drinks.",
+    "location": "Jl. Cendana 8, Bandung",
+    "hours": "08:00 - 23:00",
+    "priceRange": "Rp20.000 - Rp75.000",
+    "directions": "Enter Cendana lane and follow signs to the back courtyard.",
+    "otherInfo": "Live acoustic set every Friday evening."
+  },
+  {
+    "id": "shop_003",
+    "name": "North Bean Studio",
+    "image": "assets/images/north_bean_studio.jpg",
+    "shortTags": ["specialty", "minimal", "workspace"],
+    "shortDescription": "Modern specialty cafe with a rotating single-origin menu.",
+    "location": "Jl. Dago Atas 44, Bandung",
+    "hours": "06:30 - 21:00",
+    "priceRange": "Rp28.000 - Rp80.000",
+    "directions": "On the second floor of North Point building.",
+    "otherInfo": "Separate silent corner for working sessions."
+  },
+  {
+    "id": "shop_004",
+    "name": "Senja Kopi Lab",
+    "image": "assets/images/senja_kopi_lab.jpg",
+    "shortTags": ["sunset view", "signature", "group"],
+    "shortDescription": "Rooftop coffee lab known for milk-based signature creations.",
+    "location": "Jl. Asia Afrika 101, Bandung",
+    "hours": "10:00 - 00:00",
+    "priceRange": "Rp30.000 - Rp90.000",
+    "directions": "Use elevator B to level 5 rooftop.",
+    "otherInfo": "Reservation recommended after 18:00."
+  },
+  {
+    "id": "shop_005",
+    "name": "Ruang Seduh Timur",
+    "image": "assets/images/ruang_seduh_timur.jpg",
+    "shortTags": ["local beans", "cozy", "late night"],
+    "shortDescription": "Cozy late-night cafe highlighting Indonesian local roasters.",
+    "location": "Jl. Gatot Subroto 77, Bandung",
+    "hours": "12:00 - 02:00",
+    "priceRange": "Rp18.000 - Rp60.000",
+    "directions": "Corner unit opposite Gatsu Plaza parking exit.",
+    "otherInfo": "Board games available at the cashier."
+  }
+]
