@@ -2,7 +2,7 @@
   {
     "id": "shop_001",
     "name": "Amber Roast House",
-    "image": "assets/images/amber_roast_house.jpg",
+    "image": "assets/images/mascots/top_mascot.png",
     "shortTags": ["manual brew", "quiet", "wifi"],
     "shortDescription": "Warm neighborhood cafe focused on pour-over and seasonal beans.",
     "location": "Jl. Melati 12, Bandung",
@@ -14,7 +14,7 @@
   {
     "id": "shop_002",
     "name": "Kopi Halaman",
-    "image": "assets/images/kopi_halaman.jpg",
+    "image": "assets/images/mascots/bottom_mascot.png",
     "shortTags": ["outdoor", "pet friendly", "brunch"],
     "shortDescription": "Garden-style coffee spot with all-day brunch and espresso drinks.",
     "location": "Jl. Cendana 8, Bandung",
@@ -26,7 +26,7 @@
   {
     "id": "shop_003",
     "name": "North Bean Studio",
-    "image": "assets/images/north_bean_studio.jpg",
+    "image": "assets/images/mascots/top_mascot.png",
     "shortTags": ["specialty", "minimal", "workspace"],
     "shortDescription": "Modern specialty cafe with a rotating single-origin menu.",
     "location": "Jl. Dago Atas 44, Bandung",
@@ -38,7 +38,7 @@
   {
     "id": "shop_004",
     "name": "Senja Kopi Lab",
-    "image": "assets/images/senja_kopi_lab.jpg",
+    "image": "assets/images/mascots/bottom_mascot.png",
     "shortTags": ["sunset view", "signature", "group"],
     "shortDescription": "Rooftop coffee lab known for milk-based signature creations.",
     "location": "Jl. Asia Afrika 101, Bandung",
@@ -50,7 +50,7 @@
   {
     "id": "shop_005",
     "name": "Ruang Seduh Timur",
-    "image": "assets/images/ruang_seduh_timur.jpg",
+    "image": "assets/images/mascots/top_mascot.png",
     "shortTags": ["local beans", "cozy", "late night"],
     "shortDescription": "Cozy late-night cafe highlighting Indonesian local roasters.",
     "location": "Jl. Gatot Subroto 77, Bandung",
