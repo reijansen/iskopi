@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'core/constants/app_colors.dart';
+import 'core/constants/app_radius.dart';
+import 'core/constants/app_spacing.dart';
 import 'core/constants/app_text_styles.dart';
 import 'features/home/pages/home_page.dart';
 
@@ -64,6 +66,30 @@ class IskopiApp extends StatelessWidget {
           backgroundColor: AppColors.primary,
           foregroundColor: Colors.white,
           textStyle: AppTextStyles.button,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppRadius.md),
+          ),
+          minimumSize: const Size(0, AppSpacing.buttonHeight),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: AppColors.primary,
+          side: const BorderSide(color: AppColors.primary),
+          textStyle: AppTextStyles.button,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppRadius.md),
+          ),
+          minimumSize: const Size(0, AppSpacing.buttonHeight),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: AppColors.surface,
+        hintStyle: AppTextStyles.bodySmall,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppRadius.lg),
+          borderSide: const BorderSide(color: AppColors.border),
         ),
       ),
     );

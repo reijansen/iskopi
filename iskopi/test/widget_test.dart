@@ -6,6 +6,6 @@ void main() {
   testWidgets('app boots with home route', (WidgetTester tester) async {
     await tester.pumpWidget(const IskopiApp());
 
-    expect(find.text('home page'), findsOneWidget);
+    expect(find.text('iskopi components'), findsOneWidget);
   });
 }
