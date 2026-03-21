@@ -2,31 +2,62 @@ import 'package:flutter/material.dart';
 
 import '../../../app.dart';
 import '../../../core/constants/app_colors.dart';
+import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
-import '../../../features/directory/widgets/coffee_shop_card.dart';
-import '../../../features/home/widgets/home_menu_overlay.dart';
-import '../../../shared/widgets/custom_app_bar.dart';
-import '../../../shared/widgets/custom_bottom_nav_bar.dart';
-import '../../../shared/widgets/custom_filled_button.dart';
+import '../../../core/constants/app_text_styles.dart';
 import '../../../shared/widgets/custom_outline_button.dart';
-import '../../../shared/widgets/custom_search_bar.dart';
+import '../widgets/home_mascot_illustration.dart';
+import '../widgets/home_menu_overlay.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  static const String _topMascotAsset = 'assets/images/mascots/top_mascot.png';
+  static const String _bottomMascotAsset =
+      'assets/images/mascots/bottom_mascot.png';
+
   @override
-  State<HomePage> createState() => _HomePageState();
-}
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            final bool isCompact = constraints.maxHeight < 760;
 
-class _HomePageState extends State<HomePage> {
-  int _currentTabIndex = 0;
+            if (isCompact) {
+              return SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+                child: _HomeContent(
+                  onMenuTap: () => _openMenuOverlay(context),
+                  topMascotHeight: AppSpacing.xxl * 3.2,
+                  bottomMascotHeight: AppSpacing.xxl * 2.2,
+                  useSpacer: false,
+                ),
+              );
+            }
 
-  void _openMenuOverlay() {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+              child: _HomeContent(
+                onMenuTap: () => _openMenuOverlay(context),
+                topMascotHeight: AppSpacing.xxl * 4,
+                bottomMascotHeight: AppSpacing.xxl * 3,
+                useSpacer: true,
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  void _openMenuOverlay(BuildContext context) {
     showGeneralDialog<void>(
       context: context,
       barrierDismissible: true,
-      barrierLabel: 'menu',
-      transitionDuration: const Duration(milliseconds: 180),
+      barrierLabel: 'home_menu',
+      barrierColor: Colors.transparent,
+      transitionDuration: const Duration(milliseconds: 220),
       pageBuilder:
           (
             BuildContext dialogContext,
@@ -34,101 +65,157 @@ class _HomePageState extends State<HomePage> {
             Animation<double> secondaryAnimation,
           ) {
             return HomeMenuOverlay(
+              activeItem: HomeMenuItem.home,
               onClose: () => Navigator.of(dialogContext).pop(),
-              onHome: () => _navigateFromOverlay(AppRoutes.home, dialogContext),
-              onAbout: () =>
-                  _navigateFromOverlay(AppRoutes.about, dialogContext),
-              onDirectory: () =>
-                  _navigateFromOverlay(AppRoutes.directory, dialogContext),
-              onCantDecide: () =>
-                  _navigateFromOverlay(AppRoutes.spin, dialogContext),
+              onHome: () => Navigator.of(dialogContext).pop(),
+              onAbout: () => _navigateFromOverlay(
+                context: context,
+                dialogContext: dialogContext,
+                route: AppRoutes.about,
+              ),
+              onDirectory: () => _navigateFromOverlay(
+                context: context,
+                dialogContext: dialogContext,
+                route: AppRoutes.directory,
+              ),
+              onCantDecide: () => _navigateFromOverlay(
+                context: context,
+                dialogContext: dialogContext,
+                route: AppRoutes.spin,
+              ),
+            );
+          },
+      transitionBuilder:
+          (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) {
+            final CurvedAnimation curve = CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeOutCubic,
+            );
+
+            return FadeTransition(
+              opacity: curve,
+              child: SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(0.04, -0.03),
+                  end: Offset.zero,
+                ).animate(curve),
+                child: child,
+              ),
             );
           },
     );
   }
 
-  void _navigateFromOverlay(String route, BuildContext dialogContext) {
+  void _navigateFromOverlay({
+    required BuildContext context,
+    required BuildContext dialogContext,
+    required String route,
+  }) {
     Navigator.of(dialogContext).pop();
-
-    if (route == AppRoutes.home) {
-      return;
-    }
-
     Navigator.of(context).pushNamed(route);
   }
+}
 
-  void _onNavTap(int index) {
-    setState(() {
-      _currentTabIndex = index;
-    });
+class _HomeContent extends StatelessWidget {
+  const _HomeContent({
+    required this.onMenuTap,
+    required this.topMascotHeight,
+    required this.bottomMascotHeight,
+    required this.useSpacer,
+  });
 
-    final String route = switch (index) {
-      0 => AppRoutes.home,
-      1 => AppRoutes.directory,
-      2 => AppRoutes.spin,
-      3 => AppRoutes.about,
-      _ => AppRoutes.home,
-    };
-
-    if (route != AppRoutes.home) {
-      Navigator.of(context).pushNamed(route);
-    }
-  }
+  final VoidCallback onMenuTap;
+  final double topMascotHeight;
+  final double bottomMascotHeight;
+  final bool useSpacer;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: 'iskopi components',
-        actions: <Widget>[
-          IconButton(
-            onPressed: _openMenuOverlay,
-            icon: const Icon(Icons.menu_rounded),
-            color: AppColors.textPrimary,
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const CustomSearchBar(),
-            const SizedBox(height: AppSpacing.lg),
-            Wrap(
-              spacing: AppSpacing.md,
-              runSpacing: AppSpacing.md,
-              children: <Widget>[
-                CustomFilledButton(
-                  text: 'Primary Action',
-                  icon: Icons.local_cafe_rounded,
-                  onPressed: () {},
-                ),
-                CustomOutlineButton(
-                  text: 'Secondary',
-                  icon: Icons.explore_rounded,
-                  onPressed: () {},
-                ),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.lg),
-            CoffeeShopCard(
-              imagePath: 'assets/images/demo_shop.jpg',
-              name: 'Kopi Sudut Kampus',
-              tags: const <String>['WiFi', 'Student-friendly', 'Affordable'],
-              description:
-                  'Sample preview card for the shared design system in phase 2.',
-              onViewShop: () =>
-                  Navigator.of(context).pushNamed(AppRoutes.shopDetails),
-            ),
-            const SizedBox(height: AppSpacing.xl),
-          ],
+    return Column(
+      children: <Widget>[
+        const SizedBox(height: AppSpacing.md),
+        _HomeHeader(onMenuTap: onMenuTap),
+        const SizedBox(height: AppSpacing.sm),
+        const Divider(height: 1, color: AppColors.border),
+        const SizedBox(height: AppSpacing.lg),
+        HomeMascotIllustration(
+          assetPath: HomePage._topMascotAsset,
+          height: topMascotHeight,
         ),
-      ),
-      bottomNavigationBar: CustomBottomNavBar(
-        currentIndex: _currentTabIndex,
-        onTap: _onNavTap,
-      ),
+        const SizedBox(height: AppSpacing.xl),
+        Text(
+          'What coffee are we drinking today?',
+          style: AppTextStyles.headingLarge.copyWith(
+            fontSize: AppSpacing.xl + AppSpacing.md,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: AppSpacing.xl),
+        SizedBox(
+          width: double.infinity,
+          child: CustomOutlineButton(
+            text: 'DIRECTORY',
+            onPressed: () =>
+                Navigator.of(context).pushNamed(AppRoutes.directory),
+          ),
+        ),
+        const SizedBox(height: AppSpacing.md),
+        SizedBox(
+          width: double.infinity,
+          child: CustomOutlineButton(
+            text: 'CAN\'T DECIDE',
+            onPressed: () => Navigator.of(context).pushNamed(AppRoutes.spin),
+          ),
+        ),
+        if (useSpacer)
+          const Spacer()
+        else
+          const SizedBox(height: AppSpacing.xl),
+        HomeMascotIllustration(
+          assetPath: HomePage._bottomMascotAsset,
+          height: bottomMascotHeight,
+        ),
+        const SizedBox(height: AppSpacing.xl),
+      ],
+    );
+  }
+}
+
+class _HomeHeader extends StatelessWidget {
+  const _HomeHeader({required this.onMenuTap});
+
+  final VoidCallback onMenuTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Text(
+          'IsKopi',
+          style: AppTextStyles.headingMedium.copyWith(
+            fontSize: AppSpacing.xl + AppSpacing.md,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        const Spacer(),
+        Material(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(AppRadius.md),
+          child: InkWell(
+            onTap: onMenuTap,
+            borderRadius: BorderRadius.circular(AppRadius.md),
+            child: const Padding(
+              padding: EdgeInsets.all(AppSpacing.sm),
+              child: Icon(Icons.menu_rounded, color: AppColors.textPrimary),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

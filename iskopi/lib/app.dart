@@ -4,9 +4,13 @@ import 'core/constants/app_colors.dart';
 import 'core/constants/app_radius.dart';
 import 'core/constants/app_spacing.dart';
 import 'core/constants/app_text_styles.dart';
+import 'features/about/pages/about_page.dart';
+import 'features/directory/pages/directory_page.dart';
 import 'features/home/pages/home_page.dart';
+import 'features/spin/pages/spin_page.dart';
 
 class AppRoutes {
+  static const String root = '/';
   static const String home = '/home';
   static const String directory = '/directory';
   static const String spin = '/spin';
@@ -23,17 +27,15 @@ class IskopiApp extends StatelessWidget {
       title: 'iskopi',
       debugShowCheckedModeBanner: false,
       theme: _buildTheme(),
-      initialRoute: AppRoutes.home,
+      initialRoute: AppRoutes.root,
       routes: {
+        AppRoutes.root: (context) => const HomePage(),
         AppRoutes.home: (context) => const HomePage(),
-        AppRoutes.directory: (context) =>
-            const _RoutePlaceholderPage(title: 'directory page'),
-        AppRoutes.spin: (context) =>
-            const _RoutePlaceholderPage(title: 'spin page'),
+        AppRoutes.directory: (context) => const DirectoryPage(),
+        AppRoutes.spin: (context) => const SpinPage(),
+        AppRoutes.about: (context) => const AboutPage(),
         AppRoutes.shopDetails: (context) =>
             const _RoutePlaceholderPage(title: 'shop details page'),
-        AppRoutes.about: (context) =>
-            const _RoutePlaceholderPage(title: 'about page'),
       },
     );
   }
