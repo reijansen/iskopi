@@ -6,17 +6,19 @@ import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
 import '../../../data/models/coffee_shop.dart';
 
-class SpinResultModal extends StatelessWidget {
-  const SpinResultModal({
+class SpinResultDialog extends StatelessWidget {
+  const SpinResultDialog({
     super.key,
     required this.shop,
     required this.onClose,
     required this.onViewShop,
+    required this.onSpinAgain,
   });
 
   final CoffeeShop shop;
   final VoidCallback onClose;
   final VoidCallback onViewShop;
+  final VoidCallback onSpinAgain;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class SpinResultModal extends StatelessWidget {
                       children: <Widget>[
                         Expanded(
                           child: Text(
-                            'Ang pick namin sa iyo ay...',
+                            'Ang pick namin sa\'yo ay...',
                             style: AppTextStyles.title.copyWith(
                               color: Colors.white,
                               fontSize: 11,
@@ -138,10 +140,22 @@ class SpinResultModal extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
-                                  shop.shortTags.take(3).join(' • '),
+                                  shop.shortTags.take(3).join(' - '),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                   style: AppTextStyles.bodySmall.copyWith(
                                     color: AppColors.primary,
                                     fontSize: 10,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  shop.shortDescription,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: AppTextStyles.bodySmall.copyWith(
+                                    fontSize: 10,
+                                    color: AppColors.textSecondary,
                                   ),
                                 ),
                                 const SizedBox(height: AppSpacing.xs),
@@ -185,7 +199,7 @@ class SpinResultModal extends StatelessWidget {
                     child: SizedBox(
                       width: double.infinity,
                       child: OutlinedButton(
-                        onPressed: onClose,
+                        onPressed: onSpinAgain,
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(
                             color: AppColors.primary,

@@ -10,7 +10,7 @@ import '../../../shared/widgets/brand_top_bar.dart';
 import '../../../shared/widgets/custom_bottom_nav_bar.dart';
 import '../providers/spin_provider.dart';
 import '../widgets/selectable_shop_card.dart';
-import '../widgets/spin_result_modal.dart';
+import '../widgets/spin_result_dialog.dart';
 import '../widgets/spin_wheel_widget.dart';
 
 class SpinPage extends StatefulWidget {
@@ -22,6 +22,7 @@ class SpinPage extends StatefulWidget {
 
 class _SpinPageState extends State<SpinPage> {
   late final SpinProvider _provider;
+  bool _isResultDialogVisible = false;
 
   @override
   void initState() {
@@ -107,20 +108,27 @@ class _SpinPageState extends State<SpinPage> {
     Navigator.of(context).pushReplacementNamed(route);
   }
 
-  void _showResultModal() {
+  void _showResultDialog() {
+    if (_isResultDialogVisible) {
+      return;
+    }
+
     final result = _provider.latestResult;
     if (result == null) {
       return;
     }
 
+    _isResultDialogVisible = true;
     showDialog<void>(
       context: context,
       barrierDismissible: true,
       barrierColor: AppColors.overlay,
       builder: (BuildContext dialogContext) {
-        return SpinResultModal(
+        return SpinResultDialog(
           shop: result,
-          onClose: () => Navigator.of(dialogContext).pop(),
+          onClose: () {
+            Navigator.of(dialogContext).pop();
+          },
           onViewShop: () {
             Navigator.of(dialogContext).pop();
             Navigator.of(context).pushNamed(
@@ -128,9 +136,15 @@ class _SpinPageState extends State<SpinPage> {
               arguments: result,
             );
           },
+          onSpinAgain: () {
+            Navigator.of(dialogContext).pop();
+            _provider.clearLatestResult();
+          },
         );
       },
-    );
+    ).whenComplete(() {
+      _isResultDialogVisible = false;
+    });
   }
 
   @override
@@ -190,7 +204,7 @@ class _SpinPageState extends State<SpinPage> {
                       onSpinEnd: (int landedIndex) {
                         _provider.finishSpin(landedIndex: landedIndex);
                         if (mounted) {
-                          _showResultModal();
+                          _showResultDialog();
                         }
                       },
                     ),

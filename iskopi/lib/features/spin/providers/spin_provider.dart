@@ -129,6 +129,7 @@ class SpinProvider extends ChangeNotifier {
       return;
     }
 
+    _latestResult = null;
     _pendingTargetIndex = Random().nextInt(shops.length);
     _isSpinning = true;
     _spinRequestId += 1;
@@ -149,6 +150,14 @@ class SpinProvider extends ChangeNotifier {
     _latestResult = shops[safeIndex];
     _isSpinning = false;
     _pendingTargetIndex = null;
+    notifyListeners();
+  }
+
+  void clearLatestResult() {
+    if (_latestResult == null) {
+      return;
+    }
+    _latestResult = null;
     notifyListeners();
   }
 }
