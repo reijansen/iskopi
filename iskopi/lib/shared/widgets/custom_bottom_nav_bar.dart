@@ -27,22 +27,17 @@ class CustomBottomNavBar extends StatelessWidget {
     return SafeArea(
       top: false,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(
-          AppSpacing.lg,
-          AppSpacing.sm,
-          AppSpacing.lg,
-          AppSpacing.md,
-        ),
+        padding: const EdgeInsets.fromLTRB(AppSpacing.md, 1, AppSpacing.md, 1),
         child: Container(
-          height: AppSpacing.navBarHeight,
+          height: 46,
           decoration: BoxDecoration(
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(AppRadius.xl),
             boxShadow: const <BoxShadow>[
               BoxShadow(
-                color: AppColors.shadow,
-                blurRadius: AppSpacing.xl,
-                offset: Offset(0, AppSpacing.sm),
+                color: AppColors.shadowSoft,
+                blurRadius: 6,
+                offset: Offset(0, 1),
               ),
             ],
           ),
@@ -57,7 +52,10 @@ class CustomBottomNavBar extends StatelessWidget {
                   onTap: () => onTap(index),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 180),
-                    margin: const EdgeInsets.all(AppSpacing.sm),
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.xs,
+                      vertical: 3,
+                    ),
                     decoration: BoxDecoration(
                       color: isActive
                           ? AppColors.primarySoft
@@ -69,14 +67,16 @@ class CustomBottomNavBar extends StatelessWidget {
                       children: <Widget>[
                         Icon(
                           item.icon,
+                          size: 16,
                           color: isActive
                               ? AppColors.primary
                               : AppColors.textSecondary,
                         ),
-                        const SizedBox(height: AppSpacing.xs),
+                        const SizedBox(height: 1),
                         Text(
                           item.label,
                           style: AppTextStyles.label.copyWith(
+                            fontSize: 9,
                             color: isActive
                                 ? AppColors.primary
                                 : AppColors.textSecondary,

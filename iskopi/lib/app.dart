@@ -7,6 +7,7 @@ import 'core/constants/app_text_styles.dart';
 import 'features/about/pages/about_page.dart';
 import 'features/directory/pages/directory_page.dart';
 import 'features/home/pages/home_page.dart';
+import 'features/shop_details/pages/shop_details_page.dart';
 import 'features/spin/pages/spin_page.dart';
 
 class AppRoutes {
@@ -34,8 +35,23 @@ class IskopiApp extends StatelessWidget {
         AppRoutes.directory: (context) => const DirectoryPage(),
         AppRoutes.spin: (context) => const SpinPage(),
         AppRoutes.about: (context) => const AboutPage(),
-        AppRoutes.shopDetails: (context) =>
-            const _RoutePlaceholderPage(title: 'shop details page'),
+      },
+      onGenerateRoute: (RouteSettings settings) {
+        if (settings.name == AppRoutes.shopDetails) {
+          return MaterialPageRoute<void>(
+            builder: (BuildContext context) =>
+                ShopDetailsPage(argument: settings.arguments),
+            settings: settings,
+          );
+        }
+
+        return null;
+      },
+      onUnknownRoute: (RouteSettings settings) {
+        return MaterialPageRoute<void>(
+          builder: (BuildContext context) =>
+              const _RoutePlaceholderPage(title: 'page not found'),
+        );
       },
     );
   }

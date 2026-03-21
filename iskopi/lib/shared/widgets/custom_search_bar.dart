@@ -11,16 +11,24 @@ class CustomSearchBar extends StatelessWidget {
     this.hintText = 'Search coffee shops',
     this.onChanged,
     this.controller,
+    this.height = AppSpacing.searchBarHeight,
+    this.textStyle,
+    this.hintStyle,
+    this.iconSize = 24,
   });
 
   final String hintText;
   final ValueChanged<String>? onChanged;
   final TextEditingController? controller;
+  final double height;
+  final TextStyle? textStyle;
+  final TextStyle? hintStyle;
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: AppSpacing.searchBarHeight,
+      height: height,
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
       decoration: BoxDecoration(
         color: AppColors.surface,
@@ -29,18 +37,22 @@ class CustomSearchBar extends StatelessWidget {
       ),
       child: Row(
         children: <Widget>[
-          const Icon(Icons.search_rounded, color: AppColors.textSecondary),
+          Icon(
+            Icons.search_rounded,
+            color: AppColors.textSecondary,
+            size: iconSize,
+          ),
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: TextField(
               controller: controller,
               onChanged: onChanged,
-              style: AppTextStyles.body,
+              style: textStyle ?? AppTextStyles.body,
               decoration: InputDecoration(
                 isCollapsed: true,
                 border: InputBorder.none,
                 hintText: hintText,
-                hintStyle: AppTextStyles.bodySmall,
+                hintStyle: hintStyle ?? AppTextStyles.bodySmall,
               ),
             ),
           ),

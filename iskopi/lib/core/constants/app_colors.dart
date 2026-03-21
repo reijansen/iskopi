@@ -13,4 +13,5 @@ class AppColors {
   static const Color textSecondary = Color(0xFF6B4F3A);
   static const Color overlay = Color(0x99000000);
   static const Color shadow = Color(0x1A2D1D0F);
+  static const Color shadowSoft = Color(0x102D1D0F);
 }

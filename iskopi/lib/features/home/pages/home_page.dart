@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../app.dart';
 import '../../../core/constants/app_colors.dart';
-import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
+import '../../../shared/widgets/brand_top_bar.dart';
 import '../../../shared/widgets/custom_outline_button.dart';
 import '../widgets/home_mascot_illustration.dart';
 import '../widgets/home_menu_overlay.dart';
@@ -140,8 +140,8 @@ class _HomeContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         const SizedBox(height: AppSpacing.md),
-        _HomeHeader(onMenuTap: onMenuTap),
-        const SizedBox(height: AppSpacing.sm),
+        BrandTopBar(onMenuTap: onMenuTap),
+        const SizedBox(height: AppSpacing.xs),
         const Divider(height: 1, color: AppColors.border),
         const SizedBox(height: AppSpacing.xl),
         Align(
@@ -199,37 +199,6 @@ class _HomeContent extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.xl),
-      ],
-    );
-  }
-}
-
-class _HomeHeader extends StatelessWidget {
-  const _HomeHeader({required this.onMenuTap});
-
-  final VoidCallback onMenuTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Text(
-          'IsKopi',
-          style: AppTextStyles.headingMedium.copyWith(
-            fontSize: 36,
-            fontWeight: FontWeight.w700,
-            color: AppColors.primary,
-          ),
-        ),
-        const Spacer(),
-        InkWell(
-          onTap: onMenuTap,
-          borderRadius: BorderRadius.circular(AppRadius.md),
-          child: const Padding(
-            padding: EdgeInsets.all(AppSpacing.sm),
-            child: Icon(Icons.menu_rounded, color: AppColors.primary),
-          ),
-        ),
       ],
     );
   }

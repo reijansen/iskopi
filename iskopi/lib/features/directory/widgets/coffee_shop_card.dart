@@ -5,7 +5,6 @@ import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
 import '../../../shared/widgets/app_card.dart';
-import '../../../shared/widgets/custom_outline_button.dart';
 
 class CoffeeShopCard extends StatelessWidget {
   const CoffeeShopCard({
@@ -15,6 +14,7 @@ class CoffeeShopCard extends StatelessWidget {
     required this.tags,
     this.description,
     required this.onViewShop,
+    this.onTap,
   });
 
   final String imagePath;
@@ -22,77 +22,112 @@ class CoffeeShopCard extends StatelessWidget {
   final List<String> tags;
   final String? description;
   final VoidCallback onViewShop;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return AppCard(
-      padding: const EdgeInsets.all(AppSpacing.md),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(AppRadius.md),
-            child: SizedBox(
-              height: AppSpacing.cardImageHeight,
-              width: double.infinity,
-              child: Image.asset(
-                imagePath,
-                fit: BoxFit.cover,
-                errorBuilder:
-                    (
-                      BuildContext context,
-                      Object error,
-                      StackTrace? stackTrace,
-                    ) {
-                      return Container(
-                        color: AppColors.primarySoft,
-                        alignment: Alignment.center,
-                        child: const Icon(
-                          Icons.local_cafe_rounded,
-                          color: AppColors.primary,
-                          size: AppSpacing.xxl + AppSpacing.sm,
-                        ),
-                      );
-                    },
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: AppCard(
+        padding: const EdgeInsets.fromLTRB(
+          AppSpacing.sm,
+          AppSpacing.sm,
+          AppSpacing.sm,
+          AppSpacing.sm,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(AppRadius.md),
+              child: SizedBox(
+                height: 96,
+                width: double.infinity,
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.cover,
+                  errorBuilder:
+                      (
+                        BuildContext context,
+                        Object error,
+                        StackTrace? stackTrace,
+                      ) {
+                        return Container(
+                          color: AppColors.primarySoft,
+                          alignment: Alignment.center,
+                          child: const Icon(
+                            Icons.local_cafe_rounded,
+                            color: AppColors.primary,
+                            size: AppSpacing.xl,
+                          ),
+                        );
+                      },
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: AppSpacing.md),
-          Text(name, style: AppTextStyles.title),
-          const SizedBox(height: AppSpacing.sm),
-          Wrap(
-            spacing: AppSpacing.sm,
-            runSpacing: AppSpacing.sm,
-            children: tags.map(_buildTag).toList(),
-          ),
-          if (description != null) ...<Widget>[
             const SizedBox(height: AppSpacing.sm),
-            Text(description!, style: AppTextStyles.bodySmall),
+            Text(
+              name,
+              style: AppTextStyles.title.copyWith(
+                color: AppColors.primary,
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+              ),
+            ),
+            const SizedBox(height: AppSpacing.xs),
+            Text(
+              tags.take(3).join(' - '),
+              style: AppTextStyles.bodySmall.copyWith(
+                color: AppColors.primary,
+                fontSize: 11,
+              ),
+            ),
+            if (description != null && description!.isNotEmpty) ...<Widget>[
+              const SizedBox(height: AppSpacing.xs),
+              Text(
+                description!,
+                style: AppTextStyles.bodySmall.copyWith(fontSize: 10),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+            const SizedBox(height: AppSpacing.sm),
+            _SmallFilledActionButton(text: 'View Shop', onPressed: onViewShop),
           ],
-          const SizedBox(height: AppSpacing.md),
-          CustomOutlineButton(
-            text: 'View shop',
-            icon: Icons.arrow_forward_rounded,
-            onPressed: onViewShop,
-          ),
-        ],
+        ),
       ),
     );
   }
+}
 
-  Widget _buildTag(String tag) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.sm,
-        vertical: AppSpacing.xs,
-      ),
-      decoration: BoxDecoration(
-        color: AppColors.primarySoft,
-        borderRadius: BorderRadius.circular(AppRadius.pill),
-      ),
-      child: Text(
-        tag,
-        style: AppTextStyles.label.copyWith(color: AppColors.primary),
+class _SmallFilledActionButton extends StatelessWidget {
+  const _SmallFilledActionButton({required this.text, required this.onPressed});
+
+  final String text;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 28,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.primary,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppRadius.pill),
+          ),
+          textStyle: AppTextStyles.label.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+            fontSize: 11,
+          ),
+          elevation: 0,
+        ),
+        child: Text(text),
       ),
     );
   }
