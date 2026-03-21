@@ -16,10 +16,12 @@ class SelectableShopCard extends StatelessWidget {
 
   final CoffeeShop shop;
   final bool isSelected;
-  final VoidCallback onToggle;
+  final VoidCallback? onToggle;
 
   @override
   Widget build(BuildContext context) {
+    final bool isDisabled = onToggle == null;
+
     return Stack(
       clipBehavior: Clip.none,
       children: <Widget>[
@@ -117,7 +119,11 @@ class SelectableShopCard extends StatelessWidget {
               width: 20,
               height: 20,
               decoration: BoxDecoration(
-                color: isSelected ? const Color(0xFFFF3B4B) : AppColors.primary,
+                color: isDisabled
+                    ? AppColors.border
+                    : (isSelected
+                          ? const Color(0xFFFF3B4B)
+                          : AppColors.primary),
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -128,6 +134,17 @@ class SelectableShopCard extends StatelessWidget {
             ),
           ),
         ),
+        if (isDisabled)
+          Positioned.fill(
+            child: IgnorePointer(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.22),
+                  borderRadius: BorderRadius.circular(AppRadius.lg),
+                ),
+              ),
+            ),
+          ),
       ],
     );
   }

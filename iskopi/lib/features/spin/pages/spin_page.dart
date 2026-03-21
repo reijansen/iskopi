@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 import '../../../app.dart';
@@ -12,6 +10,8 @@ import '../../../shared/widgets/brand_top_bar.dart';
 import '../../../shared/widgets/custom_bottom_nav_bar.dart';
 import '../providers/spin_provider.dart';
 import '../widgets/selectable_shop_card.dart';
+import '../widgets/spin_result_modal.dart';
+import '../widgets/spin_wheel_widget.dart';
 
 class SpinPage extends StatefulWidget {
   const SpinPage({super.key});
@@ -107,6 +107,32 @@ class _SpinPageState extends State<SpinPage> {
     Navigator.of(context).pushReplacementNamed(route);
   }
 
+  void _showResultModal() {
+    final result = _provider.latestResult;
+    if (result == null) {
+      return;
+    }
+
+    showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      barrierColor: AppColors.overlay,
+      builder: (BuildContext dialogContext) {
+        return SpinResultModal(
+          shop: result,
+          onClose: () => Navigator.of(dialogContext).pop(),
+          onViewShop: () {
+            Navigator.of(dialogContext).pop();
+            Navigator.of(context).pushNamed(
+              AppRoutes.shopDetails,
+              arguments: result,
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -156,11 +182,18 @@ class _SpinPageState extends State<SpinPage> {
                     ),
                   ),
                   const SizedBox(height: AppSpacing.md),
-                  _WheelPreview(
-                    labels: _provider.filteredShops
-                        .map((shop) => shop.name)
-                        .take(6)
-                        .toList(),
+                  Center(
+                    child: SpinWheelWidget(
+                      shops: _provider.selectedShops,
+                      spinRequestId: _provider.spinRequestId,
+                      targetIndex: _provider.pendingTargetIndex,
+                      onSpinEnd: (int landedIndex) {
+                        _provider.finishSpin(landedIndex: landedIndex);
+                        if (mounted) {
+                          _showResultModal();
+                        }
+                      },
+                    ),
                   ),
                   const SizedBox(height: AppSpacing.md),
                   Center(
@@ -169,15 +202,7 @@ class _SpinPageState extends State<SpinPage> {
                       height: 38,
                       child: ElevatedButton(
                         onPressed: _provider.canSpin
-                            ? () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                      'Spin animation will be added in the next phase.',
-                                    ),
-                                  ),
-                                );
-                              }
+                            ? _provider.startSpin
                             : null,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary,
@@ -195,6 +220,19 @@ class _SpinPageState extends State<SpinPage> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: AppSpacing.xs),
+                  if (_provider.selectedCount < 2)
+                    Center(
+                      child: Text(
+                        'Pick at least 2 shops to spin.',
+                        style: AppTextStyles.bodySmall.copyWith(
+                          fontSize: 11,
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
+                    ),
+                  if (_provider.selectedCount < 2)
+                    const SizedBox(height: AppSpacing.sm),
                   const SizedBox(height: AppSpacing.md),
                   _SpinSearchBar(onChanged: _provider.setQuery),
                   const SizedBox(height: AppSpacing.md),
@@ -249,125 +287,14 @@ class _SpinPageState extends State<SpinPage> {
         return SelectableShopCard(
           shop: shop,
           isSelected: _provider.isSelected(shop.id),
-          onToggle: () {
+          onToggle: _provider.isSpinning
+              ? null
+              : () {
             _provider.toggleShopSelection(shop.id);
           },
         );
       },
     );
-  }
-}
-
-class _WheelPreview extends StatelessWidget {
-  const _WheelPreview({required this.labels});
-
-  final List<String> labels;
-
-  @override
-  Widget build(BuildContext context) {
-    final List<String> displayLabels = labels.isEmpty
-        ? <String>['Shop 1', 'Shop 2', 'Shop 3', 'Shop 4', 'Shop 5', 'Shop 6']
-        : labels;
-
-    return Center(
-      child: SizedBox(
-        width: 220,
-        height: 220,
-        child: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            CustomPaint(
-              size: const Size(220, 220),
-              painter: _WheelPainter(segmentCount: displayLabels.length),
-            ),
-            ..._buildWheelLabels(displayLabels),
-            Positioned(
-              top: 4,
-              child: Icon(
-                Icons.arrow_drop_down_rounded,
-                size: 34,
-                color: AppColors.secondary,
-              ),
-            ),
-            Container(
-              width: 18,
-              height: 18,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  List<Widget> _buildWheelLabels(List<String> names) {
-    const double radius = 62;
-    final double step = (2 * 3.141592653589793) / names.length;
-
-    return List<Widget>.generate(names.length, (int index) {
-      final double angle = (-3.141592653589793 / 2) + (step * index) + step / 2;
-      final double dx = radius * (index.isEven ? 0.92 : 1.0) * cos(angle);
-      final double dy = radius * (index.isEven ? 0.92 : 1.0) * sin(angle);
-      final String text = names[index];
-
-      return Positioned(
-        left: 110 + dx - 24,
-        top: 110 + dy - 10,
-        child: SizedBox(
-          width: 48,
-          child: Text(
-            text,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 7,
-              fontWeight: FontWeight.w700,
-              height: 1.1,
-            ),
-          ),
-        ),
-      );
-    });
-  }
-}
-
-class _WheelPainter extends CustomPainter {
-  const _WheelPainter({required this.segmentCount});
-
-  final int segmentCount;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Offset center = Offset(size.width / 2, size.height / 2);
-    final double radius = size.width / 2 - 8;
-    final Rect rect = Rect.fromCircle(center: center, radius: radius);
-
-    final Paint paint = Paint()..style = PaintingStyle.fill;
-    final Paint borderPaint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.4
-      ..color = AppColors.background;
-
-    final int count = segmentCount.clamp(4, 12);
-    final double sweep = (2 * pi) / count;
-    double start = -pi / 2;
-
-    for (int i = 0; i < count; i++) {
-      paint.color = i.isEven ? AppColors.primary : const Color(0xFFFFA04A);
-      canvas.drawArc(rect, start, sweep, true, paint);
-      canvas.drawArc(rect, start, sweep, true, borderPaint);
-      start += sweep;
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant _WheelPainter oldDelegate) {
-    return oldDelegate.segmentCount != segmentCount;
   }
 }
 
