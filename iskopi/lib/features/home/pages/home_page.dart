@@ -29,8 +29,8 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
                 child: _HomeContent(
                   onMenuTap: () => _openMenuOverlay(context),
-                  topMascotHeight: AppSpacing.xxl * 3.2,
-                  bottomMascotHeight: AppSpacing.xxl * 2.2,
+                  topMascotHeight: AppSpacing.xxl * 4.1,
+                  bottomMascotHeight: AppSpacing.xxl * 5,
                   useSpacer: false,
                 ),
               );
@@ -40,8 +40,8 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
               child: _HomeContent(
                 onMenuTap: () => _openMenuOverlay(context),
-                topMascotHeight: AppSpacing.xxl * 4,
-                bottomMascotHeight: AppSpacing.xxl * 3,
+                topMascotHeight: AppSpacing.xxl * 4.8,
+                bottomMascotHeight: AppSpacing.xxl * 6,
                 useSpacer: true,
               ),
             );
@@ -137,48 +137,66 @@ class _HomeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         const SizedBox(height: AppSpacing.md),
         _HomeHeader(onMenuTap: onMenuTap),
         const SizedBox(height: AppSpacing.sm),
         const Divider(height: 1, color: AppColors.border),
-        const SizedBox(height: AppSpacing.lg),
-        HomeMascotIllustration(
-          assetPath: HomePage._topMascotAsset,
-          height: topMascotHeight,
-        ),
         const SizedBox(height: AppSpacing.xl),
-        Text(
-          'What coffee are we drinking today?',
-          style: AppTextStyles.headingLarge.copyWith(
-            fontSize: AppSpacing.xl + AppSpacing.md,
+        Align(
+          alignment: Alignment.centerLeft,
+          child: HomeMascotIllustration(
+            assetPath: HomePage._topMascotAsset,
+            height: topMascotHeight,
           ),
-          textAlign: TextAlign.center,
         ),
         const SizedBox(height: AppSpacing.xl),
-        SizedBox(
-          width: double.infinity,
-          child: CustomOutlineButton(
-            text: 'DIRECTORY',
-            onPressed: () =>
-                Navigator.of(context).pushNamed(AppRoutes.directory),
+        Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 290),
+            child: Text(
+              'What coffee are we drinking today?',
+              style: AppTextStyles.headingLarge.copyWith(
+                fontSize: 58 / 2,
+                color: AppColors.primary,
+                fontWeight: FontWeight.w700,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+        const SizedBox(height: AppSpacing.lg),
+        Center(
+          child: SizedBox(
+            width: 220,
+            child: CustomOutlineButton(
+              text: 'DIRECTORY',
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(AppRoutes.directory),
+            ),
           ),
         ),
         const SizedBox(height: AppSpacing.md),
-        SizedBox(
-          width: double.infinity,
-          child: CustomOutlineButton(
-            text: 'CAN\'T DECIDE',
-            onPressed: () => Navigator.of(context).pushNamed(AppRoutes.spin),
+        Center(
+          child: SizedBox(
+            width: 220,
+            child: CustomOutlineButton(
+              text: 'CAN\'T DECIDE',
+              onPressed: () => Navigator.of(context).pushNamed(AppRoutes.spin),
+            ),
           ),
         ),
         if (useSpacer)
           const Spacer()
         else
           const SizedBox(height: AppSpacing.xl),
-        HomeMascotIllustration(
-          assetPath: HomePage._bottomMascotAsset,
-          height: bottomMascotHeight,
+        Align(
+          alignment: Alignment.centerRight,
+          child: HomeMascotIllustration(
+            assetPath: HomePage._bottomMascotAsset,
+            height: bottomMascotHeight,
+          ),
         ),
         const SizedBox(height: AppSpacing.xl),
       ],
@@ -198,21 +216,18 @@ class _HomeHeader extends StatelessWidget {
         Text(
           'IsKopi',
           style: AppTextStyles.headingMedium.copyWith(
-            fontSize: AppSpacing.xl + AppSpacing.md,
+            fontSize: 36,
             fontWeight: FontWeight.w700,
+            color: AppColors.primary,
           ),
         ),
         const Spacer(),
-        Material(
-          color: AppColors.surface,
+        InkWell(
+          onTap: onMenuTap,
           borderRadius: BorderRadius.circular(AppRadius.md),
-          child: InkWell(
-            onTap: onMenuTap,
-            borderRadius: BorderRadius.circular(AppRadius.md),
-            child: const Padding(
-              padding: EdgeInsets.all(AppSpacing.sm),
-              child: Icon(Icons.menu_rounded, color: AppColors.textPrimary),
-            ),
+          child: const Padding(
+            padding: EdgeInsets.all(AppSpacing.sm),
+            child: Icon(Icons.menu_rounded, color: AppColors.primary),
           ),
         ),
       ],
