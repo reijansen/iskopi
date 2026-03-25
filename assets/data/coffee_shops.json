@@ -1,86 +1,87 @@
-[
+﻿[
   {
     "id": "shop_001",
-    "name": "Calie’s Café",
-    "image": "assets/images/mascots/caliescafe.jpg",
+    "name": "Calieâ€™s CafÃ©",
+    "image": "assets/images/shops/caliescafe.jpg",
     "shortTags": ["meals", "quick-stop"],
-    "shortDescription": "A small kiosk-style café with a warm, homey setup offering coffee, milk tea, and quick snacks—ideal for students looking for an affordable and convenient tambayan inside campus.",
+    "shortDescription": "A small kiosk-style cafÃ© with a warm, homey setup offering coffee, milk tea, and quick snacksâ€”ideal for students looking for an affordable and convenient tambayan inside campus.",
     "location": "UPV Miagao, Common Union Building (CUB)",
     "hours": "08:00 - 17:00 (Monday to Friday)",
-    "priceRange": "₱65 - ₱150",
+    "priceRange": "â‚±65 - â‚±150",
     "directions": "From Miagao Church, go to the tricycle area near Dimsum Panda and ride a red tricycle. Tell the driver to drop you at UPV CUB.",
-    "otherInfo": "• Serves espresso-based coffee, frappes, and milk tea\n• Offers pastries and packaged snacks\n• Budget-friendly and student-focused\n• Best for quick orders between classes"
+    "otherInfo": "â€¢ Serves espresso-based coffee, frappes, and milk tea\nâ€¢ Offers pastries and packaged snacks\nâ€¢ Budget-friendly and student-focused\nâ€¢ Best for quick orders between classes"
   },
   {
     "id": "shop_002",
     "name": "Beans and Bubbles",
-    "image": "assets/images/mascots/beansandbubbles.jpg",
+    "image": "assets/images/shops/beansandbubbles.jpg",
     "shortTags": ["aircon", "alfresco", "group-friendly", "meals", "minimalist", "outlets"],
-    "shortDescription": "A modern café with a clean and cozy interior offering coffee, meals, and pastries—perfect for studying, hanging out, or relaxing with both indoor and alfresco seating.",
+    "shortDescription": "A modern cafÃ© with a clean and cozy interior offering coffee, meals, and pastriesâ€”perfect for studying, hanging out, or relaxing with both indoor and alfresco seating.",
     "location": "Barangay Mat-y, Miagao, Iloilo",
     "hours": "09:00 - 21:00",
-    "priceRange": "₱85 - ₱200",
+    "priceRange": "â‚±85 - â‚±200",
     "directions": "Go to the tricycle area at the back of Miagao Church beside Marillac School and ride a tricycle. Tell the driver to drop you at Beans and Bubbles in Barangay Mat-y.",
-    "otherInfo": "• Fully air-conditioned\n• Free WiFi and charging outlets\n• Serves rice meals, coffee, and pastries\n• Has an alfresco area\n• Student-friendly environment\n• Laundry shop beside the café\n• Two dogs roaming around"
+    "otherInfo": "â€¢ Fully air-conditioned\nâ€¢ Free WiFi and charging outlets\nâ€¢ Serves rice meals, coffee, and pastries\nâ€¢ Has an alfresco area\nâ€¢ Student-friendly environment\nâ€¢ Laundry shop beside the cafÃ©\nâ€¢ Two dogs roaming around"
   },
   {
     "id": "shop_003",
     "name": "The Box Coffee",
-    "image": "assets/images/mascots/theboxcoffee.jpg",
+    "image": "assets/images/shops/theboxcoffee.jpg",
     "shortTags": ["aircon", "alfresco", "minimalist", "outlets"],
     "shortDescription": "A minimalist specialty coffee shop with a calm and dimly lit atmosphere, perfect for focused studying, quiet conversations, or solo coffee sessions.",
     "location": "In front of UP Visayas, Miagao, Iloilo",
     "hours": "09:00 - 21:00",
-    "priceRange": "₱85 - ₱250",
-    "directions": "Located in front of UP Visayas. From the main gate, a short walk will take you directly to the café.",
-    "otherInfo": "• Free WiFi\n• Charging outlets available\n• Serves specialty coffee and pastries\n• Quiet and cozy ambiance ideal for studying"
+    "priceRange": "â‚±85 - â‚±250",
+    "directions": "Located in front of UP Visayas. From the main gate, a short walk will take you directly to the cafÃ©.",
+    "otherInfo": "â€¢ Free WiFi\nâ€¢ Charging outlets available\nâ€¢ Serves specialty coffee and pastries\nâ€¢ Quiet and cozy ambiance ideal for studying"
   },
   {
     "id": "shop_004",
     "name": "Quicky Coffee",
-    "image": "assets/images/mascots/quickycoffee.jpg",
+    "image": "assets/images/shops/quickycoffee.jpg",
     "shortTags": ["aircon", "group-friendly", "meals", "outlets"],
-    "shortDescription": "A simple and spacious café with a laid-back vibe, perfect for group hangouts, casual study sessions, and affordable meals and coffee.",
+    "shortDescription": "A simple and spacious cafÃ© with a laid-back vibe, perfect for group hangouts, casual study sessions, and affordable meals and coffee.",
     "location": "Nonato Extension St., Baybay Norte, Miagao (Near Frig's Apt)",
     "hours": "Tue - Thu: 10:00 - 02:00, Fri - Mon: 10:00 - 20:00",
-    "priceRange": "₱65 - ₱150",
-    "directions": "From Miagao Church, take the road turning right before the Miagao Bridge, then go straight until you reach Nonato Extension St. The café is located near Frig's Apartment.",
-    "otherInfo": "• Fully air-conditioned\n• Free WiFi\n• Serves coffee, waffles, rice meals, sandwiches, and snacks\n• Spacious seating, ideal for groups"
+    "priceRange": "â‚±65 - â‚±150",
+    "directions": "From Miagao Church, take the road turning right before the Miagao Bridge, then go straight until you reach Nonato Extension St. The cafÃ© is located near Frig's Apartment.",
+    "otherInfo": "â€¢ Fully air-conditioned\nâ€¢ Free WiFi\nâ€¢ Serves coffee, waffles, rice meals, sandwiches, and snacks\nâ€¢ Spacious seating, ideal for groups"
   },
   {
     "id": "shop_005",
     "name": "Du'ag",
-    "image": "assets/images/mascots/duagcafe.jpg",
+    "image": "assets/images/shops/duagcafe.jpg",
     "shortTags": ["aircon", "alfresco", "camping", "group-friendly", "meals", "minimalist", "outlets"],
-    "shortDescription": "A unique café and outdoor tambayan offering a mix of coffee, nature, and relaxing riverside vibes—perfect for unwinding, group hangouts, and late-night chill sessions.",
+    "shortDescription": "A unique cafÃ© and outdoor tambayan offering a mix of coffee, nature, and relaxing riverside vibesâ€”perfect for unwinding, group hangouts, and late-night chill sessions.",
     "location": "Sitio Halin, Miagao, Iloilo",
     "hours": "09:00 - 23:00",
-    "priceRange": "₱85 - ₱200",
+    "priceRange": "â‚±85 - â‚±200",
     "directions": "From Miagao SK Gym, go straight along the road, then turn left toward Sitio Halin. Continue until you reach DU'AG.",
-    "otherInfo": "• Fully air-conditioned indoor area\n• Free WiFi and charging outlets\n• Serves coffee, drinks, sandwiches, rice meals, panini, pasta, and snacks\n• Alfresco and camping setup available\n• Riverside view with bonfire area\n• Friendly and accommodating owners"
+    "otherInfo": "â€¢ Fully air-conditioned indoor area\nâ€¢ Free WiFi and charging outlets\nâ€¢ Serves coffee, drinks, sandwiches, rice meals, panini, pasta, and snacks\nâ€¢ Alfresco and camping setup available\nâ€¢ Riverside view with bonfire area\nâ€¢ Friendly and accommodating owners"
   },
   {
     "id": "shop_006",
     "name": "Panda Coffee Hello Lemon Miagao",
-    "image": "assets/images/mascots/pandacoffee.jpg",
+    "image": "assets/images/shops/pandacoffee.jpg",
     "shortTags": ["budget", "quick-stop"],
-    "shortDescription": "A bright and cheerful takeout-only drink stall offering affordable coffee, lemonade, and sweet refreshments—perfect for quick grabs on the go.",
+    "shortDescription": "A bright and cheerful takeout-only drink stall offering affordable coffee, lemonade, and sweet refreshmentsâ€”perfect for quick grabs on the go.",
     "location": "In front of ISAT-U Miagao, Iloilo",
     "hours": "08:00 - 18:00",
-    "priceRange": "₱37 - ₱52",
+    "priceRange": "â‚±37 - â‚±52",
     "directions": "Located right across the street of ISAT-U Miagao, making it easily accessible for students.",
-    "otherInfo": "• Takeout only\n• Offers coffee, lemonade, and sweet drinks\n• Very affordable\n• Ideal for quick refreshment stops"
+    "otherInfo": "â€¢ Takeout only\nâ€¢ Offers coffee, lemonade, and sweet drinks\nâ€¢ Very affordable\nâ€¢ Ideal for quick refreshment stops"
   },
   {
     "id": "shop_007",
     "name": "RC Kape Break",
-    "image": "assets/images/mascots/kapebreak.jpg",
+    "image": "assets/images/shops/kapebreak.jpg",
     "shortTags": ["budget", "meals", "quick-stop"],
-    "shortDescription": "A mobile coffee and snack cart offering affordable drinks and street-style meals—perfect for quick bites and late afternoon to evening tambayan.",
+    "shortDescription": "A mobile coffee and snack cart offering affordable drinks and street-style mealsâ€”perfect for quick bites and late afternoon to evening tambayan.",
     "location": "Usually beside Miagao Church (location may vary)",
     "hours": "15:00 - 00:00",
-    "priceRange": "₱37 - ₱100",
+    "priceRange": "â‚±37 - â‚±100",
     "directions": "Usually found beside Miagao Church in the afternoon. Location may change depending on town events.",
-    "otherInfo": "• Mobile cart setup (location varies)\n• Offers coffee, sweet drinks, meals, snacks, and siomai\n• Budget-friendly options\n• Best visited in the afternoon to late evening"
+    "otherInfo": "â€¢ Mobile cart setup (location varies)\nâ€¢ Offers coffee, sweet drinks, meals, snacks, and siomai\nâ€¢ Budget-friendly options\nâ€¢ Best visited in the afternoon to late evening"
   }
 ]
+
