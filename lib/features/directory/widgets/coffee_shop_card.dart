@@ -90,11 +90,38 @@ class CoffeeShopCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.xs),
-            Text(
-              tags.take(3).join(' - '),
-              style: AppTextStyles.bodySmall.copyWith(
-                color: AppColors.primary,
-                fontSize: 11,
+            SizedBox(
+              height: 22,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                itemCount: tags.length > 3 ? 3 : tags.length,
+                separatorBuilder:
+                    (BuildContext context, int index) =>
+                        const SizedBox(width: 6),
+                itemBuilder: (BuildContext context, int index) {
+                  final String tag = tags[index];
+                  return Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    decoration: BoxDecoration(
+                      color: AppColors.primarySoft.withValues(alpha: 0.5),
+                      borderRadius: BorderRadius.circular(AppRadius.pill),
+                      border: Border.all(
+                        color: AppColors.border.withValues(alpha: 0.45),
+                      ),
+                    ),
+                    child: Text(
+                      tag,
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: AppColors.textSecondary,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 9.5,
+                        height: 1.0,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
             if (description != null && description!.isNotEmpty) ...<Widget>[
