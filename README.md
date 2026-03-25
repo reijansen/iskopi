@@ -15,6 +15,7 @@ IsKopi is a Flutter mobile app developed for **CMSC 156 - Mobile Development**. 
 - [Application Architecture](#application-architecture)
 - [Project Structure](#project-structure)
 - [Data Source and Format](#data-source-and-format)
+- [Current Shop Directory](#current-shop-directory)
 - [Getting Started](#getting-started)
 - [Run and Build Commands](#run-and-build-commands)
 - [Testing and Quality Checks](#testing-and-quality-checks)
@@ -98,6 +99,9 @@ assets/
   data/
     coffee_shops.json
   images/
+    about/
+    mascots/   # top_mascot.png, bottom_mascot.png
+    shops/     # coffee shop photos used by directory/details
 ```
 
 ## Data Source and Format
@@ -105,6 +109,11 @@ assets/
 Coffee shop records are stored in:
 
 - `assets/data/coffee_shops.json`
+
+Coffee shop images are stored in:
+
+- `assets/images/shops/` for shop photos
+- `assets/images/mascots/` for home mascots only
 
 `CoffeeShop` fields:
 
@@ -120,6 +129,18 @@ Coffee shop records are stored in:
 - `otherInfo`
 
 When adding new entries, keep field names and value types consistent with `lib/data/models/coffee_shop.dart`.
+
+## Current Shop Directory
+
+The current curated shops included in the app are:
+
+1. Calie's Cafe
+2. Beans and Bubbles
+3. The Box Coffee
+4. Quicky Coffee
+5. DU'AG
+6. Panda Coffee Hello Lemon Miagao
+7. RC Kape Break
 
 ## Getting Started
 
@@ -199,7 +220,7 @@ Before submitting changes:
 
 ## Known Notes
 
-- The current JSON dataset may contain placeholder sample entries. Update `assets/data/coffee_shops.json` with final UP Visayas and nearby cafes before release/demo.
+- The app already uses curated real shop entries for UP Visayas and nearby areas in `assets/data/coffee_shops.json`.
 - No backend is required; this app currently uses local assets and local persistence.
 
 ## Troubleshooting
