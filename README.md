@@ -202,7 +202,7 @@ flutter build web
 
 ## Testing and Quality Checks
 
-Before submitting changes:
+Before committing changes:
 
 1. Run `flutter analyze`.
 2. Run `flutter test`.
@@ -245,6 +245,16 @@ flutter run
 - Recheck platform setup with `flutter doctor`.
 - Ensure USB debugging (Android) or simulator availability is enabled.
 
-## License
+### Developer Rights
+You are free to:
+- Use this project for personal purposes
+- Modify and distribute the source code
+- Create and publish derivative works
 
-No `LICENSE` file is currently included. Add one if this project will be distributed publicly.
+### Conditions
+- Include the original copyright notice
+- Include this substantial portions of the software
+
+### Liability
+This software is provided **"as is"**, without warranty of any kind.  
+The authors are not liable for any claim, damages, or other liability.
