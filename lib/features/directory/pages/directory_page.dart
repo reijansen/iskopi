@@ -25,7 +25,7 @@ class _DirectoryPageState extends State<DirectoryPage> {
   static const String _filterBudget = 'budget';
   static const String _filterWifi = 'wifi';
   static const String _filterStudent = 'student';
-  static const String _filterCozy = 'cozy';
+  static const String _filterAircon = 'aircon';
   static const String _filterAffordable = 'affordable';
 
   final CoffeeShopRepository _repository = CoffeeShopRepository();
@@ -109,9 +109,9 @@ class _DirectoryPageState extends State<DirectoryPage> {
               tag.toLowerCase().contains('student') ||
               tag.toLowerCase().contains('workspace'),
         ),
-        _filterCozy => shop.shortTags.any(
+        _filterAircon => shop.shortTags.any(
           (String tag) =>
-              tag.toLowerCase().contains('cozy') ||
+              tag.toLowerCase().contains('aircon') ||
               tag.toLowerCase().contains('quiet'),
         ),
         _filterAffordable => shop.shortTags.any(
@@ -335,9 +335,9 @@ class _FilterChips extends StatelessWidget {
             filterKey: _DirectoryPageState._filterStudent,
           ),
           _chip(
-            label: 'cozy',
+            label: 'aircon',
             icon: Icons.chair_alt_rounded,
-            filterKey: _DirectoryPageState._filterCozy,
+            filterKey: _DirectoryPageState._filterAircon,
           ),
           _chip(
             label: 'affordable',
