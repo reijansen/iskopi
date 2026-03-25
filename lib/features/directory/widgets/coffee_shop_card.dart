@@ -30,6 +30,20 @@ class CoffeeShopCard extends StatelessWidget {
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
       child: AppCard(
+        boxShadow: const <BoxShadow>[
+          BoxShadow(
+            color: AppColors.shadowSoft,
+            blurRadius: 10,
+            spreadRadius: 0.4,
+            offset: Offset(0, 3),
+          ),
+          BoxShadow(
+            color: AppColors.shadow,
+            blurRadius: 20,
+            spreadRadius: -6,
+            offset: Offset(0, 10),
+          ),
+        ],
         padding: const EdgeInsets.fromLTRB(
           AppSpacing.sm,
           AppSpacing.sm,
