@@ -4,6 +4,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
+import '../../../core/constants/shop_tags.dart';
 import '../../../shared/widgets/app_card.dart';
 
 class CoffeeShopCard extends StatelessWidget {
@@ -26,6 +27,12 @@ class CoffeeShopCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> displayTags = tags
+        .where(ShopTags.allowed.contains)
+        .toSet()
+        .take(3)
+        .toList();
+
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
@@ -95,12 +102,12 @@ class CoffeeShopCard extends StatelessWidget {
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
-                itemCount: tags.length > 3 ? 3 : tags.length,
+                itemCount: displayTags.length,
                 separatorBuilder:
                     (BuildContext context, int index) =>
                         const SizedBox(width: 6),
                 itemBuilder: (BuildContext context, int index) {
-                  final String tag = tags[index];
+                  final String tag = displayTags[index];
                   return Container(
                     alignment: Alignment.center,
                     padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -140,6 +147,7 @@ class CoffeeShopCard extends StatelessWidget {
       ),
     );
   }
+
 }
 
 class _SmallFilledActionButton extends StatelessWidget {

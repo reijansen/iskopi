@@ -5,6 +5,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
+import '../../../core/constants/shop_tags.dart';
 import '../../../data/models/coffee_shop.dart';
 import '../../../data/repositories/coffee_shop_repository.dart';
 import '../../../features/home/widgets/home_menu_overlay.dart';
@@ -21,20 +22,13 @@ class DirectoryPage extends StatefulWidget {
 }
 
 class _DirectoryPageState extends State<DirectoryPage> {
-  static const String _filterAll = 'all';
-  static const String _filterBudget = 'budget';
-  static const String _filterWifi = 'wifi';
-  static const String _filterStudent = 'student';
-  static const String _filterAircon = 'aircon';
-  static const String _filterAffordable = 'affordable';
-
   final CoffeeShopRepository _repository = CoffeeShopRepository();
   final TextEditingController _searchController = TextEditingController();
 
   List<CoffeeShop> _allShops = <CoffeeShop>[];
   List<CoffeeShop> _filteredShops = <CoffeeShop>[];
   String _searchQuery = '';
-  String _selectedFilter = _filterAll;
+  String? _selectedFilter;
   bool _isLoading = true;
   String? _errorMessage;
 
@@ -82,7 +76,7 @@ class _DirectoryPageState extends State<DirectoryPage> {
 
   void _onFilterSelected(String filterKey) {
     setState(() {
-      _selectedFilter = filterKey;
+      _selectedFilter = _selectedFilter == filterKey ? null : filterKey;
     });
     _applyFilters();
   }
@@ -96,31 +90,9 @@ class _DirectoryPageState extends State<DirectoryPage> {
             (String tag) => tag.toLowerCase().contains(_searchQuery),
           );
 
-      final bool matchesFilter = switch (_selectedFilter) {
-        _filterAll => true,
-        _filterBudget => shop.shortTags.any(
-          (String tag) => tag.toLowerCase().contains('budget'),
-        ),
-        _filterWifi => shop.shortTags.any(
-          (String tag) => tag.toLowerCase().contains('wifi'),
-        ),
-        _filterStudent => shop.shortTags.any(
-          (String tag) =>
-              tag.toLowerCase().contains('student') ||
-              tag.toLowerCase().contains('workspace'),
-        ),
-        _filterAircon => shop.shortTags.any(
-          (String tag) =>
-              tag.toLowerCase().contains('aircon') ||
-              tag.toLowerCase().contains('quiet'),
-        ),
-        _filterAffordable => shop.shortTags.any(
-          (String tag) =>
-              tag.toLowerCase().contains('affordable') ||
-              tag.toLowerCase().contains('budget'),
-        ),
-        _ => true,
-      };
+      final bool matchesFilter =
+          _selectedFilter == null ||
+          shop.shortTags.contains(_selectedFilter);
 
       return matchesSearch && matchesFilter;
     }).toList();
@@ -304,7 +276,7 @@ class _DirectoryPageState extends State<DirectoryPage> {
 class _FilterChips extends StatelessWidget {
   const _FilterChips({required this.selectedFilter, required this.onSelected});
 
-  final String selectedFilter;
+  final String? selectedFilter;
   final ValueChanged<String> onSelected;
 
   @override
@@ -313,45 +285,15 @@ class _FilterChips extends StatelessWidget {
       height: 26,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          _chip(
-            label: 'All',
-            icon: Icons.grid_view_rounded,
-            filterKey: _DirectoryPageState._filterAll,
-          ),
-          _chip(
-            label: 'budget',
-            icon: Icons.wallet_rounded,
-            filterKey: _DirectoryPageState._filterBudget,
-          ),
-          _chip(
-            label: 'WiFi',
-            icon: Icons.wifi_rounded,
-            filterKey: _DirectoryPageState._filterWifi,
-          ),
-          _chip(
-            label: 'student',
-            icon: Icons.school_rounded,
-            filterKey: _DirectoryPageState._filterStudent,
-          ),
-          _chip(
-            label: 'aircon',
-            icon: Icons.chair_alt_rounded,
-            filterKey: _DirectoryPageState._filterAircon,
-          ),
-          _chip(
-            label: 'affordable',
-            icon: Icons.local_offer_rounded,
-            filterKey: _DirectoryPageState._filterAffordable,
-          ),
-        ],
+        children: ShopTags.allowed
+            .map((String filterKey) => _chip(label: filterKey, filterKey: filterKey))
+            .toList(),
       ),
     );
   }
 
   Widget _chip({
     required String label,
-    required IconData icon,
     required String filterKey,
   }) {
     final bool isActive = selectedFilter == filterKey;
@@ -370,7 +312,7 @@ class _FilterChips extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Icon(
-                icon,
+                _iconForFilter(filterKey),
                 size: 12,
                 color: isActive ? AppColors.primary : AppColors.textSecondary,
               ),
@@ -388,5 +330,20 @@ class _FilterChips extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  IconData _iconForFilter(String filterKey) {
+    return switch (filterKey) {
+      'aircon' => Icons.ac_unit_rounded,
+      'alfresco' => Icons.deck_rounded,
+      'budget' => Icons.wallet_rounded,
+      'camping' => Icons.park_rounded,
+      'group-friendly' => Icons.groups_rounded,
+      'meals' => Icons.restaurant_rounded,
+      'minimalist' => Icons.crop_square_rounded,
+      'outlets' => Icons.power_rounded,
+      'quick-stop' => Icons.flash_on_rounded,
+      _ => Icons.local_offer_rounded,
+    };
   }
 }

@@ -28,7 +28,7 @@ class AboutPage extends StatelessWidget {
       'Developed using Flutter with a focus on simplicity and offline '
       'usability, IsKopi prioritizes clarity, practical filters, and intuitive '
       'navigation over unnecessary features, providing students and '
-      'campus-goers with a reliable, student-friendly tool for everyday coffee '
+      'campus-goers with a reliable tool for everyday coffee '
       'decisions.';
 
   void _onBottomNavTap(BuildContext context, int index) {
