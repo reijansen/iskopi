@@ -62,6 +62,7 @@ flutter:
   assets:
     - assets/data/
     - assets/images/
+    - assets/images/shops/
     - assets/images/about/
     - assets/images/mascots/
 

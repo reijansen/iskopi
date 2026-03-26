@@ -5,6 +5,7 @@ import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
 import '../../../data/models/coffee_shop.dart';
+import '../../../shared/widgets/resilient_asset_image.dart';
 
 class SpinResultDialog extends StatelessWidget {
   const SpinResultDialog({
@@ -98,8 +99,8 @@ class SpinResultDialog extends StatelessWidget {
                             child: SizedBox(
                               width: double.infinity,
                               height: 130,
-                              child: Image.asset(
-                                shop.image,
+                              child: ResilientAssetImage(
+                                assetPath: shop.image,
                                 fit: BoxFit.cover,
                                 errorBuilder:
                                     (

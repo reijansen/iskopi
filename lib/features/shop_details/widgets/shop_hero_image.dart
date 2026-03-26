@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_radius.dart';
 import '../../../core/constants/app_spacing.dart';
+import '../../../shared/widgets/resilient_asset_image.dart';
 
 class ShopHeroImage extends StatelessWidget {
   const ShopHeroImage({super.key, required this.imagePath});
@@ -16,8 +17,8 @@ class ShopHeroImage extends StatelessWidget {
       child: SizedBox(
         height: 156,
         width: double.infinity,
-        child: Image.asset(
-          imagePath,
+        child: ResilientAssetImage(
+          assetPath: imagePath,
           fit: BoxFit.cover,
           errorBuilder:
               (BuildContext context, Object error, StackTrace? stackTrace) {

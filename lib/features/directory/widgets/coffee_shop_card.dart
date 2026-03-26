@@ -6,6 +6,7 @@ import '../../../core/constants/app_spacing.dart';
 import '../../../core/constants/app_text_styles.dart';
 import '../../../core/constants/shop_tags.dart';
 import '../../../shared/widgets/app_card.dart';
+import '../../../shared/widgets/resilient_asset_image.dart';
 
 class CoffeeShopCard extends StatelessWidget {
   const CoffeeShopCard({
@@ -65,8 +66,8 @@ class CoffeeShopCard extends StatelessWidget {
               child: SizedBox(
                 height: 96,
                 width: double.infinity,
-                child: Image.asset(
-                  imagePath,
+                child: ResilientAssetImage(
+                  assetPath: imagePath,
                   fit: BoxFit.cover,
                   errorBuilder:
                       (

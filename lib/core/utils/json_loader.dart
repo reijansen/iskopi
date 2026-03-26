@@ -6,8 +6,12 @@ class JsonLoader {
   const JsonLoader();
 
   Future<dynamic> loadJson(String assetPath) async {
-    final String data = await rootBundle.loadString(assetPath);
-    return jsonDecode(data);
+    final ByteData data = await rootBundle.load(assetPath);
+    final String decoded = utf8.decode(
+      data.buffer.asUint8List(),
+      allowMalformed: false,
+    );
+    return jsonDecode(decoded);
   }
 
   Future<List<dynamic>> loadJsonList(String assetPath) async {
